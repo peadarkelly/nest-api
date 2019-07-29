@@ -1,8 +1,8 @@
 import * as Knex from 'knex'
 import { Injectable, Inject } from '@nestjs/common'
-import { User } from 'src/data-models/user.model'
+import { User } from 'src/modules/user/data-models/user.model'
 import { KNEX } from 'src/types'
-import { BaseDao } from 'src/daos/base.dao'
+import { BaseDao } from 'src/modules/common/daos/base.dao'
 
 @Injectable()
 export class UserDao extends BaseDao<User> {

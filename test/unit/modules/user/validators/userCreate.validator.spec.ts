@@ -1,7 +1,7 @@
 import { describe, it, beforeEach } from 'mocha'
 import { assert } from 'chai'
 import { ValidationError } from 'class-validator'
-import { UserCreateValidator } from 'src/validators/userCreate.validator'
+import { UserCreateValidator } from 'src/modules/user/validators/userCreate.validator'
 
 describe('UserCreateValidator', () => {
 

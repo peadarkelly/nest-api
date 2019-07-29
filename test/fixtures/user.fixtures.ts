@@ -1,4 +1,4 @@
-import { User } from 'src/data-models/user.model'
+import { User } from 'src/modules/user/data-models/user.model'
 
 export function generateUser(email = 'user@mail.com'): User {
   return {

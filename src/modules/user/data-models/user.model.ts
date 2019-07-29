@@ -1,4 +1,4 @@
-import { BaseModel } from 'src/data-models/base.model'
+import { BaseModel } from 'src/modules/common/data-models/base.model'
 
 export interface User extends BaseModel {
   email: string

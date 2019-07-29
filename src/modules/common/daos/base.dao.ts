@@ -1,5 +1,5 @@
 import * as Knex from 'knex'
-import { BaseModel } from 'src/data-models/base.model'
+import { BaseModel } from 'src/modules/common/data-models/base.model'
 
 export abstract class BaseDao<T extends BaseModel> {
 

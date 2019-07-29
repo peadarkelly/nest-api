@@ -1,7 +1,7 @@
 import { describe, it, beforeEach } from 'mocha'
 import { assert } from 'chai'
-import { RequestValidator, ApiValidationErrors } from 'src/validators/request.validator'
-import { Validator } from 'src/validators/validator'
+import { RequestValidator, ApiValidationErrors } from 'src/modules/common/validators/request.validator'
+import { Validator } from 'src/modules/common/validators/validator'
 import { mock, when, instance } from 'ts-mockito'
 import { ValidationError } from 'class-validator'
 

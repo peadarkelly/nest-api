@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core'
 import { INestApplication } from '@nestjs/common'
-import { AppModule } from 'src/app.module'
+import { AppModule } from 'src/modules/app.module'
 import { attachHeaders } from 'src/middleware/headers.middleware'
 import { configureSwagger } from 'src/middleware/swagger.middleware'
 import { PORT } from 'src/config'

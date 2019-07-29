@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { ValidationError } from 'class-validator'
-import { Validator } from 'src/validators/validator'
+import { Validator } from 'src/modules/common/validators/validator'
 import { extend } from 'lodash'
 
 export interface ApiValidationErrors {

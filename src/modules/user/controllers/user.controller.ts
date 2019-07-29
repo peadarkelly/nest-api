@@ -1,11 +1,11 @@
 import { Controller, Get, Param, Post, Body, NotFoundException, BadRequestException, ConflictException } from '@nestjs/common'
 import { ApiResponse } from '@nestjs/swagger'
-import { ApiValidationErrors, RequestValidator } from 'src/validators/request.validator'
-import { UserService } from 'src/services/user.service'
-import { UserResponse } from 'src/dtos/userResponse.dto'
-import { UserCreateRequest } from 'src/dtos/userCreateRequest.dto'
-import { UserCreateResponse } from 'src/dtos/userCreateResponse.dto'
-import { UserCreateValidator } from 'src/validators/userCreate.validator'
+import { ApiValidationErrors, RequestValidator } from 'src/modules/common/validators/request.validator'
+import { UserService } from 'src/modules/user/services/user.service'
+import { UserResponse } from 'src/modules/user/dtos/userResponse.dto'
+import { UserCreateRequest } from 'src/modules/user/dtos/userCreateRequest.dto'
+import { UserCreateResponse } from 'src/modules/user/dtos/userCreateResponse.dto'
+import { UserCreateValidator } from 'src/modules/user/validators/userCreate.validator'
 import { OK, NOT_FOUND, CREATED, BAD_REQUEST, CONFLICT } from 'http-status-codes'
 
 @Controller('users')
@@ -16,13 +16,13 @@ export class UserController {
     private readonly service: UserService) {}
 
   @Get()
-  @ApiResponse({ status: OK })
+  @ApiResponse({ status: OK,  type: UserResponse, isArray: true })
   public async getUsers(): Promise<UserResponse[]> {
     return this.service.getUsers()
   }
 
   @Get(':email')
-  @ApiResponse({ status: OK })
+  @ApiResponse({ status: OK,  type: UserResponse })
   @ApiResponse({ status: NOT_FOUND, description: 'No user can be found with the provided email' })
   public async getUser(@Param('email') email: string): Promise<UserResponse> {
     const response: UserResponse = await this.service.getUser(email)
@@ -35,7 +35,7 @@ export class UserController {
   }
 
   @Post()
-  @ApiResponse({ status: CREATED, description: 'User successfully created' })
+  @ApiResponse({ status: CREATED, description: 'User successfully created', type: UserCreateResponse })
   @ApiResponse({ status: BAD_REQUEST, description: 'Request body failed to meet validation criteria' })
   @ApiResponse({ status: CONFLICT, description: 'A user already exists with the provided email' })
   public async createUser(@Body() user: UserCreateRequest): Promise<UserCreateResponse> {

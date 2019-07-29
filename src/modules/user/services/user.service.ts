@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
-import { User } from 'src/data-models/user.model'
-import { UserMapper } from 'src/mappers/user.mapper'
-import { UserDao } from 'src/daos/user.dao'
-import { UserCreateResponse } from 'src/dtos/userCreateResponse.dto'
-import { UserCreateRequest } from 'src/dtos/userCreateRequest.dto'
-import { UserResponse } from 'src/dtos/userResponse.dto'
+import { User } from 'src/modules/user/data-models/user.model'
+import { UserMapper } from 'src/modules/user/mappers/user.mapper'
+import { UserDao } from 'src/modules/user/daos/user.dao'
+import { UserCreateResponse } from 'src/modules/user/dtos/userCreateResponse.dto'
+import { UserCreateRequest } from 'src/modules/user/dtos/userCreateRequest.dto'
+import { UserResponse } from 'src/modules/user/dtos/userResponse.dto'
 
 @Injectable()
 export class UserService {

@@ -1,7 +1,7 @@
 import { Module, Provider } from '@nestjs/common'
-import { RequestValidator } from 'src/validators/request.validator'
+import { RequestValidator } from 'src/modules/common/validators/request.validator'
 import { KNEX } from 'src/types'
-import { knex } from 'src/constants/knex.const'
+import { knex } from 'src/modules/common/constants/knex.const'
 
 const knexProvider: Provider = {
   provide: KNEX,

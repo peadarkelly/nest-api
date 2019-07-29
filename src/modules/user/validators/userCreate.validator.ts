@@ -1,6 +1,6 @@
-import { Validator } from 'src/validators/validator'
+import { Validator } from 'src/modules/common/validators/validator'
 import { IsNotEmpty, MaxLength, IsEmail } from 'class-validator'
-import { UserCreateRequest } from 'src/dtos/userCreateRequest.dto'
+import { UserCreateRequest } from 'src/modules/user/dtos/userCreateRequest.dto'
 
 export class UserCreateValidator extends Validator implements UserCreateRequest {
 
