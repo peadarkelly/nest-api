@@ -1,0 +1,13 @@
+{
+  "extension": [
+    ".ts"
+  ],
+  "exclude": [
+    "src/daos/*.ts",
+    "test/*",
+    "**/*.d.ts"
+  ],
+  "reporter": [
+    "text"
+  ]
+}
