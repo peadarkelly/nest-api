@@ -8,6 +8,10 @@
 
 Once the app is started, go to `http://localhost:<port>/docs/` to view the Swagger docs
 
+Two folder structures are available:
+* Group by type - [here](https://github.com/peadarkelly/nest-api/tree/group-by-type) (default)
+* Group by module - [here](https://github.com/peadarkelly/nest-api/tree/group-by-module)
+
 ## Setup
 
 ```bash
