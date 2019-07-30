@@ -16,13 +16,13 @@ export class UserController {
     private readonly service: UserService) {}
 
   @Get()
-  @ApiResponse({ status: OK })
+  @ApiResponse({ status: OK,  type: UserResponse, isArray: true })
   public async getUsers(): Promise<UserResponse[]> {
     return this.service.getUsers()
   }
 
   @Get(':email')
-  @ApiResponse({ status: OK })
+  @ApiResponse({ status: OK,  type: UserResponse })
   @ApiResponse({ status: NOT_FOUND, description: 'No user can be found with the provided email' })
   public async getUser(@Param('email') email: string): Promise<UserResponse> {
     const response: UserResponse = await this.service.getUser(email)
@@ -35,7 +35,7 @@ export class UserController {
   }
 
   @Post()
-  @ApiResponse({ status: CREATED, description: 'User successfully created' })
+  @ApiResponse({ status: CREATED, description: 'User successfully created', type: UserCreateResponse })
   @ApiResponse({ status: BAD_REQUEST, description: 'Request body failed to meet validation criteria' })
   @ApiResponse({ status: CONFLICT, description: 'A user already exists with the provided email' })
   public async createUser(@Body() user: UserCreateRequest): Promise<UserCreateResponse> {
