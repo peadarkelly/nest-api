@@ -1,9 +1,9 @@
-const { PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE } = require('./config')
-const { types } = require('pg')
+import { PG_HOST, PG_PORT, PG_USER, PG_PASSWORD, PG_DATABASE } from './config'
+import { types } from 'pg'
 
 // To get the PostgreSQL Object identifiers run the following query
 // SELECT typname, oid, typarray FROM pg_type
-const OID_NUMERIC = 1700;
+const OID_NUMERIC = 1700
 types.setTypeParser(OID_NUMERIC, 'text', parseFloat)
 
 module.exports = {
