@@ -6,7 +6,7 @@ import { UserResponse } from 'src/dtos/userResponse.dto'
 import { UserCreateRequest } from 'src/dtos/userCreateRequest.dto'
 import { UserCreateResponse } from 'src/dtos/userCreateResponse.dto'
 import { UserCreateValidator } from 'src/validators/userCreate.validator'
-import { OK, NOT_FOUND, CREATED, BAD_REQUEST, CONFLICT } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 
 @Controller('users')
 export class UserController {
@@ -16,14 +16,14 @@ export class UserController {
     private readonly service: UserService) {}
 
   @Get()
-  @ApiResponse({ status: OK,  type: UserResponse, isArray: true })
+  @ApiResponse({ status: StatusCodes.OK,  type: UserResponse, isArray: true })
   public async getUsers(): Promise<UserResponse[]> {
     return this.service.getUsers()
   }
 
   @Get(':email')
-  @ApiResponse({ status: OK,  type: UserResponse })
-  @ApiResponse({ status: NOT_FOUND, description: 'No user can be found with the provided email' })
+  @ApiResponse({ status: StatusCodes.OK,  type: UserResponse })
+  @ApiResponse({ status: StatusCodes.NOT_FOUND, description: 'No user can be found with the provided email' })
   public async getUser(@Param('email') email: string): Promise<UserResponse> {
     const response: UserResponse = await this.service.getUser(email)
 
@@ -35,9 +35,9 @@ export class UserController {
   }
 
   @Post()
-  @ApiResponse({ status: CREATED, description: 'User successfully created', type: UserCreateResponse })
-  @ApiResponse({ status: BAD_REQUEST, description: 'Request body failed to meet validation criteria' })
-  @ApiResponse({ status: CONFLICT, description: 'A user already exists with the provided email' })
+  @ApiResponse({ status: StatusCodes.CREATED, description: 'User successfully created', type: UserCreateResponse })
+  @ApiResponse({ status: StatusCodes.BAD_REQUEST, description: 'Request body failed to meet validation criteria' })
+  @ApiResponse({ status: StatusCodes.CONFLICT, description: 'A user already exists with the provided email' })
   public async createUser(@Body() user: UserCreateRequest): Promise<UserCreateResponse> {
     const errors: ApiValidationErrors = await this.validator.validateRequest(new UserCreateValidator(), user)
     if (errors) {

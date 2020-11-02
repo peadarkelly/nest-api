@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 import { describe, before, it } from 'mocha'
 import { assert } from 'chai'
-import { OK } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import { UserModule } from 'src/modules/user.module'
 import { insertUser, deleteUser } from '../helpers/user.helper'
 import { generateUser } from 'test/fixtures/user.fixtures'
@@ -29,9 +29,9 @@ describe('GET /users', () => {
   it('should return all users with OK', async () => {
     const response = await request(app.getHttpServer())
       .get('/users')
-      .expect(OK)
+      .expect(StatusCodes.OK)
 
-    const users: UserResponse[] = response.body
+    const users: UserResponse[] = <UserResponse[]> response.body
     const emails: string[] = users.map((user: UserResponse) => user.email)
 
     assert.isTrue(emails.length >= 2)

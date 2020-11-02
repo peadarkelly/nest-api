@@ -25,7 +25,7 @@ export class RequestValidator {
       return this.mapToApiValidationErrors(validationErrors)
     }
 
-    return null
+    return
   }
 
   private mapToApiValidationErrors(validationErrors: ValidationError[]): ApiValidationErrors {
@@ -36,7 +36,7 @@ export class RequestValidator {
       errors[fieldErrorKey] = { message: this.getFirstFailedConstraint(validationError) }
 
       if (validationError.value !== undefined) {
-        errors[fieldErrorKey].value = validationError.value
+        errors[fieldErrorKey].value = <string> validationError.value
       }
     }
 

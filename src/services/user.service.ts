@@ -21,7 +21,7 @@ export class UserService {
   public async getUser(email: string): Promise<UserResponse> {
     const user: User = await this.dao.findByEmail(email)
 
-    return user ? this.mapper.mapToUserResponse(user) : null
+    return user ? this.mapper.mapToUserResponse(user) : undefined
   }
 
   public async createUser(body: UserCreateRequest): Promise<UserCreateResponse> {

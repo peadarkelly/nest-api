@@ -20,7 +20,7 @@ describe('UserCreateValidator', () => {
 
   describe('email', () => {
     it('should return an error when an email is not provided', async () => {
-      validator.email = null
+      validator.email = undefined
 
       const errors: ValidationError[] = await validator.validate()
 
@@ -42,7 +42,7 @@ describe('UserCreateValidator', () => {
 
   describe('firstName', () => {
     it('should return an error when firstName is not provided', async () => {
-      validator.firstName = null
+      validator.firstName = undefined
 
       const errors: ValidationError[] = await validator.validate()
 
@@ -64,7 +64,7 @@ describe('UserCreateValidator', () => {
 
   describe('lastName', () => {
     it('should return an error when lastName is not provided', async () => {
-      validator.lastName = null
+      validator.lastName = undefined
 
       const errors: ValidationError[] = await validator.validate()
 

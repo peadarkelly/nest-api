@@ -12,13 +12,13 @@ describe('UserMapper', () => {
   const mapper: UserMapper = new UserMapper()
 
   describe('mapToUser', () => {
-    it('should map a UserCreateRequest to a User data model', async () => {
+    it('should map a UserCreateRequest to a User data model', () => {
       const request: UserCreateRequest = new UserCreateRequest()
       request.email = 'user@mail.com'
       request.firstName = 'Test'
       request.lastName = 'User'
 
-      const result: User = await mapper.mapToUser(request)
+      const result: User = mapper.mapToUser(request)
 
       assert.equal(result.email, 'user@mail.com')
       assert.equal(result.first_name, 'Test')
@@ -27,13 +27,13 @@ describe('UserMapper', () => {
   })
 
   describe('mapToUserResponse', () => {
-    it('should map a User data model to a UserResponse', async () => {
+    it('should map a User data model to a UserResponse', () => {
       const user: User = generateUser()
       user.email = 'user@mail.com'
       user.first_name = 'Test'
       user.last_name = 'User'
 
-      const result: UserResponse = await mapper.mapToUserResponse(user)
+      const result: UserResponse = mapper.mapToUserResponse(user)
 
       assert.equal(result.email, 'user@mail.com')
       assert.equal(result.firstName, 'Test')
@@ -42,11 +42,11 @@ describe('UserMapper', () => {
   })
 
   describe('mapToUserCreateResponse', () => {
-    it('should map a User data model to a mapToUserCreateResponse', async () => {
+    it('should map a User data model to a mapToUserCreateResponse', () => {
       const user: User = generateUser()
       user.email = 'user@mail.com'
 
-      const result: UserCreateResponse = await mapper.mapToUserCreateResponse(user)
+      const result: UserCreateResponse = mapper.mapToUserCreateResponse(user)
 
       assert.equal(result.email, 'user@mail.com')
     })

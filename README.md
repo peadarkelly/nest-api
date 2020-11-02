@@ -32,7 +32,7 @@ Configure the `PORT` environment variable to chnage the Port that the app listen
 
 ```bash
 # compile app
-$ npm run buld
+$ npm run build
 
 # development
 $ npm run start

@@ -1,31 +1,35 @@
-import * as Knex from 'knex'
 import { BaseModel } from 'src/data-models/base.model'
 
 export abstract class BaseDao<T extends BaseModel> {
 
-  public constructor(protected knex: Knex, private table: string) {}
-
   public findAll(): Promise<T[]> {
-    return this.knex(this.table)
+    return Promise.resolve(<T[]>[])
   }
 
   public findById(id: number): Promise<T> {
-    return this.findSingleByColumnValue('id', id)
+    console.log(id)
+    return Promise.resolve(<T>undefined)
   }
 
   public findByIds(ids: number[]): Promise<T[]> {
-    return this.knex(this.table).whereIn('id', ids)
+    console.log(ids)
+    return Promise.resolve(<T[]>[])
   }
 
   public findSingleByColumnValue(column: string, value: number | string | boolean): Promise<T> {
-    return this.knex(this.table).where(column, value).first()
+    console.log(column)
+    console.log(value)
+    return Promise.resolve(<T>undefined)
   }
 
-  public findManyByColumnValue(column: string, value: any): Promise<T[]> {
-    return this.knex(this.table).where(column, value)
+  public findManyByColumnValue(column: string, value: string | number | boolean): Promise<T[]> {
+    console.log(column)
+    console.log(value)
+    return Promise.resolve(<T[]>[])
   }
 
   public create(model: T): Promise<void> {
-    return this.knex(this.table).insert(model)
+    console.log(model)
+    return Promise.resolve()
   }
 }

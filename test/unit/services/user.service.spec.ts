@@ -49,9 +49,9 @@ describe('UserService', () => {
 
   describe('getUser', () => {
     it('should resolve null if no user exists with the provided email', async () => {
-      when(dao.findByEmail('user@mail.com')).thenResolve(null)
+      when(dao.findByEmail('user@mail.com')).thenResolve()
 
-      assert.isNull(await service.getUser('user@mail.com'))
+      assert.isUndefined(await service.getUser('user@mail.com'))
 
       verify(mapper.mapToUserResponse(anything())).never()
     })

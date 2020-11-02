@@ -1,7 +1,6 @@
 import { describe, it, beforeEach } from 'mocha'
 import { assert } from 'chai'
 import { mock, instance, when, verify, anyOfClass } from 'ts-mockito'
-import { NOT_FOUND, BAD_REQUEST, CONFLICT } from 'http-status-codes'
 import { UserController } from 'src/controllers/user.controller'
 import { RequestValidator } from 'src/validators/request.validator'
 import { UserService } from 'src/services/user.service'
@@ -9,6 +8,7 @@ import { UserResponse } from 'src/dtos/userResponse.dto'
 import { UserCreateValidator } from 'src/validators/userCreate.validator'
 import { UserCreateRequest } from 'src/dtos/userCreateRequest.dto'
 import { UserCreateResponse } from 'src/dtos/userCreateResponse.dto'
+import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common'
 
 describe('UserController', () => {
 
@@ -38,13 +38,13 @@ describe('UserController', () => {
 
   describe('getUser', () => {
     it('should reject with a Not Found exception if no user exists with the provided email', async () => {
-      when(service.getUser('user@mail.com')).thenResolve(null)
+      when(service.getUser('user@mail.com')).thenResolve()
 
       try {
         await controller.getUser('user@mail.com')
         assert.fail()
-      } catch (err) {
-        assert.equal(err.getStatus(), NOT_FOUND)
+      } catch (error) {
+        assert.isTrue(error instanceof NotFoundException)
       }
     })
 
@@ -68,8 +68,8 @@ describe('UserController', () => {
       try {
         await controller.createUser(request)
         assert.fail()
-      } catch (err) {
-        assert.equal(err.getStatus(), BAD_REQUEST)
+      } catch (error) {
+        assert.isTrue(error instanceof BadRequestException)
       }
 
       verify(service.createUser(request)).never()
@@ -79,14 +79,14 @@ describe('UserController', () => {
       const request: UserCreateRequest = new UserCreateRequest()
       request.email = 'user@mail.com'
 
-      when(validator.validateRequest(anyOfClass(UserCreateValidator), request)).thenResolve(null)
+      when(validator.validateRequest(anyOfClass(UserCreateValidator), request)).thenResolve()
       when(service.getUser('user@mail.com')).thenResolve(new UserResponse())
 
       try {
         await controller.createUser(request)
         assert.fail()
-      } catch (err) {
-        assert.equal(err.getStatus(), CONFLICT)
+      } catch (error) {
+        assert.isTrue(error instanceof ConflictException)
       }
 
       verify(service.createUser(request)).never()
@@ -96,8 +96,8 @@ describe('UserController', () => {
       const request: UserCreateRequest = new UserCreateRequest()
       const response: UserCreateResponse = new UserCreateResponse()
 
-      when(validator.validateRequest(anyOfClass(UserCreateValidator), request)).thenResolve(null)
-      when(service.getUser('user@mail.com')).thenResolve(null)
+      when(validator.validateRequest(anyOfClass(UserCreateValidator), request)).thenResolve()
+      when(service.getUser('user@mail.com')).thenResolve()
       when(service.createUser(request)).thenResolve(response)
 
       const user: UserCreateResponse = await controller.createUser(request)

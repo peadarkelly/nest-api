@@ -3,10 +3,11 @@ import { Test } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 import { describe, before, it } from 'mocha'
 import { assert } from 'chai'
-import { CREATED, BAD_REQUEST, CONFLICT } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import { UserModule } from 'src/modules/user.module'
 import { insertUser, deleteUser } from '../helpers/user.helper'
 import { generateUser } from 'test/fixtures/user.fixtures'
+import { UserCreateResponse } from 'src/dtos/userCreateResponse.dto'
 
 describe('POST /users', () => {
   let app: INestApplication
@@ -32,7 +33,7 @@ describe('POST /users', () => {
         email: NEW_EMAIL,
         lastName: 'User'
       })
-      .expect(BAD_REQUEST)
+      .expect(StatusCodes.BAD_REQUEST)
   })
 
   it('should return a Conflict if a user already exists with the provided email', async () => {
@@ -43,7 +44,7 @@ describe('POST /users', () => {
         firstName: 'Test',
         lastName: 'User'
       })
-      .expect(CONFLICT)
+      .expect(StatusCodes.CONFLICT)
   })
 
   it('should return Created and the user email when the user is created successfully', async () => {
@@ -54,9 +55,9 @@ describe('POST /users', () => {
         firstName: 'Test',
         lastName: 'User'
       })
-      .expect(CREATED)
+      .expect(StatusCodes.CREATED)
 
-    assert.equal(response.body.email, NEW_EMAIL)
+    assert.equal((<UserCreateResponse>response.body).email, NEW_EMAIL)
   })
 
   after(async () => {

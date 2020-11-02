@@ -25,7 +25,7 @@ describe('RequestValidator', () => {
 
       const errors: ApiValidationErrors = await requestValidator.validateRequest(validatorInstance, {})
 
-      assert.isNull(errors)
+      assert.isUndefined(errors)
     })
 
     it('should return appropriate errors with custom messages if provided', async () => {
@@ -64,7 +64,7 @@ describe('RequestValidator', () => {
   })
 })
 
-function createValidationError(property: string, value?: any): ValidationError {
+function createValidationError(property: string, value?: string | number | boolean): ValidationError {
   const error: ValidationError = {
     property: property,
     children: [],
